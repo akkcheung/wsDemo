@@ -8,11 +8,16 @@
         
         git commit -m "first commit"
         
-        git push -u origin master
-        
         git config --global user.name "Your Name"
         git config --global user.email you@example.com
 
+        git push -u origin master
+        
+        git pull origin master
+        
+    websocket tutorial
+    
+        https://dzone.com/articles/creating-websocket-chat
 
 maven
 
@@ -28,7 +33,9 @@ maven
 
     mkdir javacirecep\tutorials\web\websocket
 
-    http://www.javacirecep.com/internet/java-a-simple-websocket-example/
+    websocket tutorial
     
-    http://stackoverflow.com/questions/10186466/creating-threads-through-annomyous-inner-class
+        http://www.javacirecep.com/internet/java-a-simple-websocket-example/
+    
+        http://stackoverflow.com/questions/10186466/creating-threads-through-annomyous-inner-class
     

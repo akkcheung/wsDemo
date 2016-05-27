@@ -10,6 +10,10 @@ import java.io.IOException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
+import java.util.GregorianCalendar;
+import java.util.Calendar;
+import java.util.Date;
  
 @WebSocket
 public class StockServiceWebSocket {
@@ -42,7 +46,9 @@ public class StockServiceWebSocket {
         if (message.equals("stop"))
             i = 0 ;
         
-        
+          if (message.equals("start at next hour"))
+            i = 2 ;
+          
         // switch (message) {
         switch (i) {
             // case "start":
@@ -68,6 +74,21 @@ public class StockServiceWebSocket {
             case 0:
                 this.stop();
                 break;
+            
+             case 2:
+                send("Stock service start at next hour !");
+             
+                executor.scheduleAtFixedRate(
+                    new Runnable() {
+                        @Override
+                        public void run() {
+                             send(StockService.getStockInfo());
+                            // send("running ...") ;
+                        }
+                    }, getDelay(), 3600, TimeUnit.SECONDS);                     
+            
+                break;
+           
         }
     }
  
@@ -94,5 +115,15 @@ public class StockServiceWebSocket {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    private long getDelay() {
+        Calendar cal = new GregorianCalendar();
+        // cal.add(Calendar.DATE, fONE_DAY);
+        
+        long result = 60 ;
+        
+        return ( result - cal.get(Calendar.MINUTE) ) * 60 ;
+                        
     }
 }

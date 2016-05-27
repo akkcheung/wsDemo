@@ -8,6 +8,7 @@ import org.eclipse.jetty.websocket.servlet.WebSocketServletFactory;
 public class StockServiceSocketServlet extends WebSocketServlet { 
         @Override
         public void configure(WebSocketServletFactory factory) {
-            factory.register(StockServiceWebSocket.class);        
+            factory.getPolicy().setIdleTimeout(12 * 60 * 60 * 1000);
+            factory.register(StockServiceWebSocket.class); 
         }
 }
